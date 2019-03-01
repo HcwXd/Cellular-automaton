@@ -56,7 +56,7 @@ document.querySelector('.speed_btn').addEventListener('click', function() {
 function startOver() {
   grid.innerHTML = '';
   let gridHeight = Math.floor(windowHeight - 250) - (Math.floor(windowHeight - 250) % boxSize);
-  let gridWidth = Math.floor(windowWidth - 250) - (Math.floor(windowWidth - 250) % boxSize);
+  let gridWidth = Math.floor(windowWidth - 50) - (Math.floor(windowWidth - 50) % boxSize);
   grid.style.height = `${gridHeight}px`;
   grid.style.width = `${gridWidth}px`;
   board = [...Array(gridHeight / boxSize)].map(() => Array(gridWidth / boxSize));
