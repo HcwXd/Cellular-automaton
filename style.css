@@ -1,9 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou");
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  color: green;
+  font-family: "ZCOOL QingKe HuangYou", cursive; }
 
 body, html {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  background-color: #1a1a1a;
+  padding: 0px;
+  margin: 0px; }
 
 .container {
   display: flex;
@@ -14,24 +20,52 @@ body, html {
   .container .dashboard {
     width: 100%;
     height: 150px;
-    padding: 25px;
+    padding: 25px 0px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: space-around;
-    align-items: center; }
+    align-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    text-transform: uppercase; }
+    .container .dashboard .nav {
+      border: 2px solid rgba(255, 255, 255, 0.05);
+      height: 150px;
+      align-items: center;
+      justify-content: space-around; }
+    .container .dashboard .title {
+      display: flex;
+      flex: 1;
+      font-size: 35px;
+      line-height: 40px; }
+    .container .dashboard .start_wrap {
+      display: flex;
+      flex: 1.5; }
+    .container .dashboard .adjust_wrap {
+      display: flex;
+      flex: 1.5; }
+    .container .dashboard .info_wrap {
+      display: flex;
+      flex: 1; }
     .container .dashboard .btn {
+      font-size: 20px;
       padding: 15px;
-      border-radius: 5px;
-      border: 1px solid black;
+      border-radius: 10px;
+      border: 2px solid green;
       text-align: center;
-      cursor: pointer; }
+      cursor: pointer;
+      width: 100px;
+      user-select: none; }
+    .container .dashboard .size_btn, .container .dashboard .speed_btn {
+      width: 150px; }
+    .container .dashboard .example_btn {
+      width: 200px; }
   .container .grid {
-    border: 1px solid black;
+    border: 1px solid green;
     display: flex; }
     .container .grid .box {
-      border: 1px solid black;
-      width: 10px;
-      height: 10px; }
+      border: 1px solid green;
+      background-color: white; }
     .container .grid .box-dead {
-      background-color: black; }
+      background-color: #1a1a1a; }
 
 /*# sourceMappingURL=style.css.map */

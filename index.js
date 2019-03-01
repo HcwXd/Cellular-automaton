@@ -1,45 +1,92 @@
 const windowHeight = window.innerHeight;
 const windowWidth = window.innerWidth;
-let boxSize = 10;
+let boxSize = 15;
+let speed = 100;
 let isStart = false;
+let board;
+let gameInterval;
+
+const grid = document.querySelector('.grid');
 
 document.querySelector('.next_btn').addEventListener('click', () => {
   gameOfLife(board);
 });
 document.querySelector('.start_btn').addEventListener('click', function() {
-  if (this.innerHTML === 'Start') {
-    this.innerHTML = 'Stop';
+  if (this.innerHTML === 'start') {
+    this.innerHTML = 'pause';
     isStart = true;
   } else {
-    this.innerHTML = 'Start';
+    this.innerHTML = 'start';
     isStart = false;
   }
 });
 
-const grid = document.querySelector('.grid');
+document.querySelector('.restart_btn').addEventListener('click', () => {
+  startOver();
+});
 
-let gridHeight = Math.floor(windowHeight - 200) - (Math.floor(windowHeight - 200) % boxSize);
-let gridWidth = Math.floor(windowWidth - 200) - (Math.floor(windowWidth - 200) % boxSize);
-grid.style.height = `${gridHeight}px`;
-grid.style.width = `${gridWidth}px`;
-
-for (let row = 0; row < gridWidth / boxSize; row++) {
-  let rowHtml = `<div class="row_wrap" data-row=${row}>`;
-  for (let col = 0; col < gridHeight / boxSize; col++) {
-    rowHtml += `<div class="box box-dead" data-x=${col} data-y=${row} data-state=0> </div>`;
+document.querySelector('.size_btn').addEventListener('click', function() {
+  if (this.innerHTML === 'normal grid') {
+    this.innerHTML = 'big grid';
+    boxSize = 20;
+  } else if (this.innerHTML === 'big grid') {
+    this.innerHTML = 'small grid';
+    boxSize = 10;
+  } else {
+    this.innerHTML = 'normal grid';
+    boxSize = 15;
   }
-  rowHtml += `</div>`;
-  grid.innerHTML += rowHtml;
+  startOver();
+});
+
+document.querySelector('.speed_btn').addEventListener('click', function() {
+  if (this.innerHTML === 'normal speed') {
+    this.innerHTML = 'fast speed';
+    speed = 50;
+  } else if (this.innerHTML === 'fast speed') {
+    this.innerHTML = 'slow speed';
+    speed = 200;
+  } else {
+    this.innerHTML = 'normal speed';
+    speed = 100;
+  }
+  runInterval();
+});
+
+function startOver() {
+  grid.innerHTML = '';
+  let gridHeight = Math.floor(windowHeight - 250) - (Math.floor(windowHeight - 250) % boxSize);
+  let gridWidth = Math.floor(windowWidth - 250) - (Math.floor(windowWidth - 250) % boxSize);
+  grid.style.height = `${gridHeight}px`;
+  grid.style.width = `${gridWidth}px`;
+  board = [...Array(gridHeight / boxSize)].map(() => Array(gridWidth / boxSize));
+  for (let row = 0; row < gridWidth / boxSize; row++) {
+    let rowHtml = `<div class="row_wrap" data-row=${row}>`;
+    for (let col = 0; col < gridHeight / boxSize; col++) {
+      rowHtml += `<div class="box box-dead" style="width:${boxSize}px;height:${boxSize}px;" data-x=${col} data-y=${row} data-state=0> </div>`;
+    }
+    rowHtml += `</div>`;
+    grid.innerHTML += rowHtml;
+  }
+
+  const boxes = document.querySelectorAll('.box');
+  boxes.forEach((el) => {
+    el.addEventListener('click', die);
+    console.log(parseInt(el.dataset.x));
+
+    board[parseInt(el.dataset.x)][parseInt(el.dataset.y)] = el;
+  });
+  runInterval();
 }
 
-const boxes = document.querySelectorAll('.box');
-const board = [...Array(gridHeight / boxSize)].map(() => Array(gridWidth / boxSize));
-boxes.forEach((el) => {
-  el.addEventListener('click', die);
-  console.log(parseInt(el.dataset.x));
+startOver();
 
-  board[parseInt(el.dataset.x)][parseInt(el.dataset.y)] = el;
-});
+function runInterval() {
+  clearInterval(gameInterval);
+  gameInterval = setInterval(() => {
+    isStart && gameOfLife(board);
+  }, speed);
+}
 
 function die() {
   console.log(this);
@@ -99,7 +146,3 @@ const gameOfLife = function(board) {
     }
   }
 };
-
-setInterval(() => {
-  isStart && gameOfLife(board);
-}, 100);
