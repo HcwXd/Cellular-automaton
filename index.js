@@ -1,11 +1,20 @@
 const windowHeight = window.innerHeight;
 const windowWidth = window.innerWidth;
-const boxSize = 10;
+let boxSize = 10;
+let isStart = false;
 
-document.querySelector('.container').innerHTML = `<div class="dashboard">
-                                                    <div class="start_btn">Start</div>
-                                                    </div>
-                                                  <div class="grid"></div>`;
+document.querySelector('.next_btn').addEventListener('click', () => {
+  gameOfLife(board);
+});
+document.querySelector('.start_btn').addEventListener('click', function() {
+  if (this.innerHTML === 'Start') {
+    this.innerHTML = 'Stop';
+    isStart = true;
+  } else {
+    this.innerHTML = 'Start';
+    isStart = false;
+  }
+});
 
 const grid = document.querySelector('.grid');
 
@@ -90,6 +99,7 @@ const gameOfLife = function(board) {
     }
   }
 };
-document.querySelector('.start_btn').addEventListener('click', () => {
-  gameOfLife(board);
-});
+
+setInterval(() => {
+  isStart && gameOfLife(board);
+}, 100);

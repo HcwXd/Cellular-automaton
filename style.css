@@ -14,12 +14,16 @@ body, html {
   .container .dashboard {
     width: 100%;
     height: 150px;
-    padding: 25px; }
-    .container .dashboard .start_btn {
+    padding: 25px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center; }
+    .container .dashboard .btn {
       padding: 15px;
       border-radius: 5px;
       border: 1px solid black;
-      text-align: center; }
+      text-align: center;
+      cursor: pointer; }
   .container .grid {
     border: 1px solid black;
     display: flex; }
