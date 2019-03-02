@@ -53,6 +53,157 @@ document.querySelector('.speed_btn').addEventListener('click', function() {
   runInterval();
 });
 
+document.querySelector('.show_example_btn').addEventListener('click', function() {
+  document.querySelector('.example_background').style.display = 'flex';
+});
+
+document.querySelector('.ten_cell_row').addEventListener('click', function() {
+  clearGrid();
+  drawExample([0, -5], [0, -4], [0, -3], [0, -2], [0, -1], [0, 0], [0, 1], [0, 2], [0, 3], [0, 4]);
+});
+
+document.querySelector('.pulsar').addEventListener('click', function() {
+  clearGrid();
+  drawExample([
+    [-2, -2],
+    [-2, 0],
+    [-2, 2],
+    [-1, -2],
+    [-1, 2],
+    [0, -2],
+    [0, 2],
+    [1, -2],
+    [1, 2],
+    [2, -2],
+    [2, 0],
+    [2, 2],
+  ]);
+});
+
+document.querySelector('.tumbler').addEventListener('click', function() {
+  clearGrid();
+  drawExample([
+    [-2, -2],
+    [-2, -1],
+    [-2, 1],
+    [-2, 2],
+    [-1, -2],
+    [-1, -1],
+    [-1, 1],
+    [-1, 2],
+    [0, -1],
+    [0, 1],
+    [1, -3],
+    [1, -1],
+    [1, 1],
+    [1, 3],
+    [2, -3],
+    [2, -1],
+    [2, 1],
+    [2, 3],
+    [3, -3],
+    [3, -2],
+    [3, 2],
+    [3, 3],
+  ]);
+});
+
+document.querySelector('.glider').addEventListener('click', function() {
+  clearGrid();
+  drawExample([[1, 1], [1, 0], [1, -1], [0, 1], [-1, 0]]);
+});
+
+document.querySelector('.lightweight_spaceship').addEventListener('click', function() {
+  clearGrid();
+  drawExample([[-2, -1], [-2, 0], [-2, 1], [-2, 2], [-1, -2], [-1, 2], [0, 2], [1, -2], [1, 1]]);
+});
+
+document.querySelector('.heavyweight_spaceship').addEventListener('click', function() {
+  clearGrid();
+  drawExample([
+    [-2, -3],
+    [-2, -2],
+    [-2, -1],
+    [-2, 0],
+    [-2, 1],
+    [-2, 2],
+    [-1, -3],
+    [-1, 3],
+    [0, -3],
+    [1, -2],
+    [1, 3],
+    [2, 0],
+    [2, 1],
+  ]);
+});
+
+document.querySelector('.gosper_glider_gun').addEventListener('click', function() {
+  clearGrid();
+  drawExample([
+    [5 - 10, 1 - 22],
+    [5 - 10, 2 - 22],
+    [6 - 10, 1 - 22],
+    [6 - 10, 2 - 22],
+    [5 - 10, 11 - 22],
+    [6 - 10, 11 - 22],
+    [7 - 10, 11 - 22],
+    [4 - 10, 12 - 22],
+    [3 - 10, 13 - 22],
+    [3 - 10, 14 - 22],
+    [8 - 10, 12 - 22],
+    [9 - 10, 13 - 22],
+    [9 - 10, 14 - 22],
+    [6 - 10, 15 - 22],
+    [4 - 10, 16 - 22],
+    [5 - 10, 17 - 22],
+    [6 - 10, 17 - 22],
+    [7 - 10, 17 - 22],
+    [6 - 10, 18 - 22],
+    [8 - 10, 16 - 22],
+    [3 - 10, 21 - 22],
+    [4 - 10, 21 - 22],
+    [5 - 10, 21 - 22],
+    [3 - 10, 22 - 22],
+    [4 - 10, 22 - 22],
+    [5 - 10, 22 - 22],
+    [2 - 10, 23 - 22],
+    [6 - 10, 23 - 22],
+    [1 - 10, 25 - 22],
+    [2 - 10, 25 - 22],
+    [6 - 10, 25 - 22],
+    [7 - 10, 25 - 22],
+    [3 - 10, 35 - 22],
+    [4 - 10, 35 - 22],
+    [3 - 10, 36 - 22],
+    [4 - 10, 36 - 22],
+  ]);
+});
+
+document.querySelector('.exploder').addEventListener('click', function() {
+  clearGrid();
+  drawExample([[-1, -1], [-1, 0], [0, -2], [0, -1], [0, 1], [1, -1], [1, 0]]);
+});
+
+document.querySelector('.diehard').addEventListener('click', function() {
+  clearGrid();
+  drawExample([[-1, 2], [0, -3], [0, -4], [1, -3], [1, 1], [1, 2], [1, 3]]);
+});
+
+function clearGrid() {
+  document.querySelector('.example_background').style.display = 'none';
+  isStart = false;
+  document.querySelector('.start_btn').innerHTML = 'start';
+  startOver();
+}
+
+function drawExample(coordinates) {
+  let [centerX, centerY] = [Math.floor(board.length / 2), Math.floor(board[0].length / 2)];
+  for (let [x, y] of coordinates) {
+    board[centerX + x][centerY + y].classList.remove('box-dead');
+    board[centerX + x][centerY + y].dataset.state = 1;
+  }
+}
+
 function startOver() {
   grid.innerHTML = '';
   let gridHeight = Math.floor(windowHeight - 250) - (Math.floor(windowHeight - 250) % boxSize);
@@ -89,7 +240,6 @@ function runInterval() {
 }
 
 function die() {
-  console.log(this);
   this.classList.toggle('box-dead');
   this.dataset.state ^= 1;
 }
