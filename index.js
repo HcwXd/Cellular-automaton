@@ -239,7 +239,7 @@ function startOver() {
   runInterval();
 }
 
-startOver();
+window.setTimeout('startOver();', 1);
 
 function runInterval() {
   clearInterval(gameInterval);
