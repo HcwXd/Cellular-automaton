@@ -7,6 +7,14 @@ let board;
 let gameInterval;
 
 const grid = document.querySelector('.grid');
+document.querySelector('.desc').innerHTML = `
+A cellular automaton is a collection of "colored" cells on a grid of specified shape that evolves through a number of discrete time steps according to a set of rules based on the states of neighboring cells. The rules are then applied iteratively for as many time steps as desired.
+You can look up more on <a href="https://en.wikipedia.org/wiki/Cellular_automaton">wiki</a>.
+`;
+
+document.querySelector('.start').addEventListener('click', () => {
+  document.querySelector('#intro_background').style.display = 'none';
+});
 
 document.querySelector('.next_btn').addEventListener('click', () => {
   gameOfLife(board);
@@ -54,7 +62,7 @@ document.querySelector('.speed_btn').addEventListener('click', function() {
 });
 
 document.querySelector('.show_example_btn').addEventListener('click', function() {
-  document.querySelector('.example_background').style.display = 'flex';
+  document.querySelector('#example_background').style.display = 'flex';
 });
 
 document.querySelector('.ten_cell_row').addEventListener('click', function() {
@@ -201,7 +209,7 @@ document.querySelector('.diehard').addEventListener('click', function() {
 });
 
 function clearGrid() {
-  document.querySelector('.example_background').style.display = 'none';
+  document.querySelector('#example_background').style.display = 'none';
   isStart = false;
   document.querySelector('.start_btn').innerHTML = 'start';
   startOver();
