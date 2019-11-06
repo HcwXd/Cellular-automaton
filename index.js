@@ -59,7 +59,18 @@ document.querySelector('.show_example_btn').addEventListener('click', function()
 
 document.querySelector('.ten_cell_row').addEventListener('click', function() {
   clearGrid();
-  drawExample([0, -5], [0, -4], [0, -3], [0, -2], [0, -1], [0, 0], [0, 1], [0, 2], [0, 3], [0, 4]);
+  drawExample([
+    [0, -5],
+    [0, -4],
+    [0, -3],
+    [0, -2],
+    [0, -1],
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    [0, 4],
+  ]);
 });
 
 document.querySelector('.pulsar').addEventListener('click', function() {
@@ -221,10 +232,8 @@ function startOver() {
   }
 
   const boxes = document.querySelectorAll('.box');
-  boxes.forEach((el) => {
+  boxes.forEach(el => {
     el.addEventListener('click', die);
-    console.log(parseInt(el.dataset.x));
-
     board[parseInt(el.dataset.x)][parseInt(el.dataset.y)] = el;
   });
   runInterval();
@@ -251,7 +260,7 @@ const gameOfLife = function(board) {
    * 2: L to D
    * 3: D to L
    */
-  const wasAlive = (node) => {
+  const wasAlive = node => {
     return parseInt(node.dataset.state) === 1 || parseInt(node.dataset.state) === 2 ? true : false;
   };
   for (let row = 0; row < board.length; row++) {
